@@ -1,0 +1,10 @@
+<h2>本科毕业生成绩打印</h2>
+<app-id-input (ok)="onIdInputOk($event)" [disabled]='busying' *ngIf="!student"></app-id-input>
+<div *ngIf="student">
+  <p>学号：{{student.XH}}</p>
+  <p>姓名：{{student.XM}}</p>
+  <p>班级：{{student.BJ}}</p>
+  <button (click)='apply_print(student.XH)' [disabled]='busying'>打印</button>
+  <button (click)='student=null' [disabled]='busying'>取消</button>
+  <p>{{message}}</p>
+</div>

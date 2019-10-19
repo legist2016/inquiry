@@ -1,0 +1,58 @@
+.id-input button{
+  float: left;
+}
+.id-input .value span {
+  font-family: Courier New;
+  font-weight: bold;
+}
+.id-input .value {
+  background-color: Window;
+  line-height: 2em;
+  height: 2em;
+  font-size: 1.25em;
+  padding-left: 5px;
+  border-radius: 5px;
+  border:1px solid gray;
+  overflow: hidden;
+  width: 14em;  
+}
+.id-input .value span
+{ 
+  display: inline-block; 
+  /*width: 14em;*/
+}
+
+.id-input .input_button {
+  display: block;
+  height: 2em;
+  text-align: center;
+  
+  /*border-style: outset;*/
+  cursor: pointer;
+  /*background-color: ButtonFace;*/
+  font-size: 25px;
+}
+
+.id-input .button {
+  height: 1.5em;
+  text-align: center;
+  vertical-align: middle;
+  /*border-style: outset;*/
+  cursor: pointer;
+  /*line-height: 50px;*/
+  /*background-color: ButtonFace;*/
+  font-size: 1.25em;
+  padding:10px;
+}
+
+.id-input #clear_xh {
+  float: right;
+  border-style: none;  
+  color: GrayText;
+  width: 1.25em;
+  
+}
+
+.id-input-disabled button{
+  background-color: gray;
+}

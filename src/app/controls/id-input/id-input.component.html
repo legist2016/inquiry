@@ -1,0 +1,14 @@
+<div class='id-input' [ngClass]='{"id-input-disabled":disabled}'>
+	<div>{{title}}</div>
+	<div style='clear:both;'></div>
+	<div class="value">
+		<span >{{value}}</span>
+		<a class="input_button" id="clear_xh" (click)="value=''">X</a>
+	</div>
+	<div class="input_pad">
+		<button class="input_button" *ngFor="let c of input_chars" (click)="value.length<maxlength?value=value+c:0" [disabled]="disabled">{{c}}</button>
+		<button class="input_button control_button" (click)="value=value.slice(0,-1)" [disabled]="disabled">退格</button>
+		<button class="input_button control_button" (click)="ok.emit(value)" [disabled]="disabled">确定</button>
+	</div>
+</div>
+<div style='clear:both'></div>
