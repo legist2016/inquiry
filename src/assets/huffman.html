@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script src="ch_pinyin.js"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+  function BTree(value=null,count=null,left=null,right=null) {
+    if(left)this.left = left;
+    if(right)this.right = right;
+    if(value)this.value = value;
+    if(count)this.count = count;
+    this.Count = function () {
+      if (this.count) {
+        return this.count;
+      } else {
+        this.count = 0
+        this.count +=this.left?this.left.Count():0;
+        this.count +=this.right?this.right.Count():0;
+        return this.count;
+      }
+
+    }
+    this.Deep = function(depth){
+      //if(this.depth)return this.depth;
+      //this.depth = 1;
+      //this.depth =this.left?this.left.Deep():0;
+      //this.depth =this.right?this.right.Deep()>this.depth?this.right.Deep():this.depth:0;
+      this.depth = depth;
+      this.len = 0
+      //console.log(this)
+      if(this.left) this.len += this.left.Deep(this.depth+1)
+      if(this.right) this.len += this.right.Deep(this.depth+1)
+      if(this.len==0)this.len = this.depth*this.count;
+      return this.len;
+    }
+  }
+  //var str = "澳门,aomi 奥秘,aomiao 奥妙,aonao 懊恼,aoqi 傲气,aoran 傲然,aoweihui 奥委会,aoxiang 翱翔,aoyou 遨游,aoyunhui 奥运会,aozhan 鏖战,ayi 阿姨,ba 把,ba 八,ba 吧,ba 爸,ba 拔,ba 罢,ba 跋,ba 巴,ba 芭,ba 扒,ba 坝,ba 霸,ba 叭,ba 靶,ba 笆,ba 疤,ba 耙,ba 捌,ba 粑,ba 茇,ba 岜,ba 鲅,ba 钯,ba 魃,ba 菝,ba 灞,ba 伯,ba 峇,ba 捭,ba 杷,ba 湃,ba 萆,ba 鲃,ba 鲌,baba 爸爸,babai 八百,babing 把柄,babude 巴不得,bacheng 八成,bachi 把持,badaling 八达岭,badao 霸道,bagao 拔高,bagong 罢工,bahen 疤痕,bai 百,bai 白,bai 摆,bai 败,bai 柏,bai 拜,bai 佰,bai 伯,bai 稗,bai 捭,bai 呗,bai 掰,bai 扒,bai 排,bai 派,bai 薜,bai 鞁,bai 鞴,baiban 百般,baibei 败北,baibei 百倍,baibu 摆布,baicai 白菜,baicheng 白城,baichi 白痴,baida 白搭,baidong 摆动,baidu 摆渡,baifang 拜访,baifei 白费,baifenbi 百分比,baifendian 百分点,baifenlv 百分率,baifenshu 百分数,baifenzhi 百分制,baifenzhi 百分之,baigei 败给,baigong 白宫,baihuai 败坏,baihuo 百货,baiji 败绩,baiju 败局,baike 百科,baikuoqi 摆阔气,bailei 败类,baili 百里,bailu 败露,bailuo 败落,baiman 摆满,baimangmang 白茫茫,bainian 百年,bainian 拜年,bainong 摆弄,bairehua 白热化,baise 白色,baishe 摆设,baishi 拜师,baitian 白天,baitiao 白条,baituo 摆脱,baituo 拜托,baiwan 百万,baixing 百姓,baixing 败兴,baixue 白雪,baiyin 白银,baiyu 百余,baiyun 白云,baizhang";
+  //var str = "abcdefabababcdeadbc";
+  var tab = new Array(256).fill(0)
+  var btree = []
+  var len = 0
+  for (let index = 0; index < str.length; index++) {
+    code = str.charCodeAt(index);
+    res = []
+    if (code > 127) {
+      //console.log(
+      res = utf8(encodeURIComponent(str[index]));
+
+    } else {
+      //console.log(code)
+      res = (x=>{return [x & 0xF0 /16 , x % 16]})(code)
+      //res = [code]
+    }
+    //console.log(res)
+    //break;
+    res.forEach(c => {
+        tab[c]++;
+      });
+  }
+  //console.log(tab)
+  tab.forEach((c, i) => {
+    if (c > 0) {
+      //console.log(i, c)
+      btree.push(new BTree(i,c))
+    }
+  })
+  var btree_sort = (a,b)=>{
+    return b.Count()-a.Count();
+  }
+  btree = btree.sort(btree_sort)
+  //console.log(btree)
+  while(btree.length>1){
+    var t1 = btree.pop()
+    var t2 = btree.pop()
+    var t3 = new BTree(null, null,t1,t2)
+    btree.push(t3)
+    btree.sort(btree_sort)
+  }
+  btree[0].Count()
+  btree[0].Deep(1)
+  console.log(btree[0], btree[0].len/8)
+
+
+  function utf8(str) {
+    
+    res = str.replace(/%/g,"").split('')
+    //res = str.substring(1).split('%')
+    for (i in res) {
+      //console.log(parseInt(res[i],16))
+      res[i] = parseInt(res[i], 16)
+    }
+    return res;
+  }
+</script>
+
+</html>

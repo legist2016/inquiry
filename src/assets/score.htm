@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/pako/1.0.6/pako.min.js"></script>
+
+</head>
+<body>
+    <textarea id="content"></textarea>
+    <button onclick="encode()">encode</button>
+    <button onclick="decode()">decode</button>
+    <textarea id="ciphertext" ></textarea>
+</body>
+</html>
+<script type="text/javascript">
+function encode(){
+    var str = $('#content').val();
+    str = window.btoa(pako.gzip(str, {to: "string"}))
+    $('#ciphertext').val(str);
+}
+function decode(){
+    var encodedData = $('#ciphertext').val();
+    var decodedData = window.atob(encodedData);
+
+    var charData    = decodedData.split('').map(function(x){return x.charCodeAt(0);});  
+    var binData     = new Uint8Array(charData);  
+    var data        = pako.inflate(binData);  
+    decodedData     = String.fromCharCode.apply(null, new Uint16Array(data));  
+
+    $('#content').val(decodedData);
+}
+</script>
