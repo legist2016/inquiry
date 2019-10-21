@@ -13,6 +13,7 @@ import { IdInputComponent } from './controls/id-input/id-input.component';
 import { DataService } from './data.service';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { HttpClientModule } from "@angular/common/http";
+import { InputPadComponent } from './controls/input-pad/input-pad.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { HttpClientModule } from "@angular/common/http";
     ArchivesSearchComponent,
     IdInputComponent,
     TopBarComponent,
+    InputPadComponent,
   ],
   bootstrap: [AppComponent],
   providers: [DataService]
