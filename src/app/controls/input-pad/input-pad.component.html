@@ -1,3 +1,22 @@
-<p>
-input-pad works!
-</p>
+<div class='pad-container'>
+    <div class='buttons'>
+        <button *ngFor="let key of '1234567890'.split('')" (click)="onKey(key)"><span>{{key}}</span></button>
+        <button key="8" class="big"><span>上翻</span></button>
+    </div>
+    <div class='buttons'>
+        <button *ngFor="let key of 'QWERTYUIOP'.split('')" (click)="onKey(key)"><span>{{key}}</span></button>
+        <button key="8" class="big"><span>下翻</span></button>
+    </div>
+    <div class='buttons'>
+        <button *ngFor="let key of 'ASDFGHJKL'.split('')" (click)="onKey(key)"><span>{{key}}</span></button>
+        <button key="8"><span>-</span></button>
+        <button key="8" class="big"><span>中/英</span></button>
+    </div>
+    <div class='buttons'>
+        <button *ngFor="let key of 'ZXCVBNM'.split('')" (click)="onKey(key)"><span>{{key}}</span></button>
+        <button key="8" (click)="onKey(' ')"><span>空</span></button>
+        <button key="8"><span>←</span></button>
+        <button class="big"><span>清除</span></button>
+        <button key="8" class="big"><span>关闭</span></button>
+    </div>
+</div>

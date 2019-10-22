@@ -11,5 +11,7 @@ export class InputPadComponent implements OnInit {
 
   ngOnInit() {
   }
+  onKey(key){
 
+  }
 }

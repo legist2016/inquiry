@@ -1,0 +1,18 @@
+button span{
+    color: inherit;
+    min-width: 1em;
+    text-align: center;
+    line-height: 1.5em;
+    white-space: nowrap;
+}
+.buttons {
+    white-space: nowrap;
+    
+}
+
+.pad-container{
+    border: solid 2px #1976d2;
+    border-radius: 5px;
+    background-color: white;
+    margin: auto;
+}
